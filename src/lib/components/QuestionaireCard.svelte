@@ -11,7 +11,8 @@
     //     I'm making an assumption that a base64 encoded name of the lover is passed as the path
         let loversName = window.location.pathname.replace(/^\//, "");
         loversName = base64Decode(loversName)
-        return loversName;
+        if (loversName !== "") return loversName;
+        return "Mi Amore";
     })
     const steps = $derived.by(() => {
         return [
@@ -118,6 +119,14 @@
         particleCount: 10,
         scalar: 4,
       });
+
+      const key = window.crypto.randomUUID();
+      localStorage.setItem(key, JSON.stringify({
+          timestamp: Date.now(),
+          conversation: buildConversationFromResponse(),
+          loverName: loversNameFromPath,
+      }));
+      localStorage.setItem('lastSaved', key)
     })
 
     const gotoStep = (id: string) => {
@@ -128,11 +137,40 @@
     const playAudioOnAccept = (node: HTMLAudioElement) => {
         if (currentStepId !== 'final-yes' && currentStepId !== 'final-no') return;
         if(node.paused) node.play();
+
+        setTimeout(() => {
+            const trackNumber = Math.floor(Math.random() * 3);
+            node.src = `/serenade-${trackNumber}.m4a`;
+            node.play();
+        }, 1000);
+
+        return () => {
+            if(!node.paused) node.pause()
+        }
+    }
+
+    const buildConversationFromResponse = () => {
+        let conversation = ""
+        loverResponseLog.forEach((id, idx) =>{
+            const step = steps.find((s) => s.id === id);
+            if(!step) return
+            conversation += `you: ${step.questionText}\n`
+            if (idx + 1 >= loverResponseLog.length) return
+            const nextStepId = loverResponseLog[idx + 1];
+            const nextStep = steps.find((s) => s.id === nextStepId);
+            if(!nextStep) return
+            if(nextStep.id === step.yesButtonGotoStep) {
+                conversation += `${loversNameFromPath}: ${step.yesButtonText}\n`
+            } else {
+                conversation += `${loversNameFromPath}: ${step.noButtonText}\n`
+            }
+        })
+        return conversation
     }
 </script>
 
 <div class="container">
-    <audio {@attach playAudioOnAccept} src="/i-love-you.mp3" class="hidden" />
+    <audio {@attach playAudioOnAccept} src="/i-love-you.mp3" class="hidden"></audio>
     <img class="img" src="/calendar.png" alt="valentine calendar" />
     <div class="component-container">
         <p class="question-text courgette-regular">
