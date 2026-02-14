@@ -38,11 +38,11 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 2.  **Install dependencies:**
     ```bash
-    npm install
+    bun install
     # or if using pnpm/yarn/bun
     # pnpm install
     # yarn install
-    # bun install
+    # npm install
     ```
 
 ### Running Locally
@@ -50,7 +50,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 Start the development server:
 
 ```bash
-npm run dev
+bun run dev
 ```
 
 Open your browser and navigate to the URL shown in the terminal (usually `http://localhost:5173`).
@@ -62,19 +62,18 @@ Open your browser and navigate to the URL shown in the terminal (usually `http:/
 How to use the application to ask your Valentine:
 
 ### 1. Create a Personalized Link
+
 You need to generate a link that includes your partner's name.
 
-1.  Open the app in your browser (e.g., `http://localhost:5173`).
-2.  Add `?q=encode<Name>` to the URL.
-    -   *Example*: `http://localhost:5173/?q=encodeJuliet`
-3.  The app will automatically redirect you to a new URL with a Base64 encoded string.
-    -   *Result*: `http://localhost:5173/?q=SnVsaWV0`
+1.  Open the app in your browser (e.g., `Example*: `https://valentine-fpd3.vercel.app?q=encode<Name>`).
+    -   *Example*: `https://valentine-fpd3.vercel.app/?q=encodeOlufunmi`
+2. The app will automatically redirect you to a new URL with a Base64 encoded string.
+    -   *Result*: `https://valentine-fpd3.vercel.app/?q=T2x1ZnVubWk=`
 4.  **Copy this new URL.** This is the link you will send to your partner.
 
 ### 2. Send to Your Partner
 Share the copied link with your special someone. When they open it, they will see a greeting with their name and can proceed through the questionnaire.
 
-### 3. View Their Response
 ### 3. View Their Response
 When your partner completes the questionnaire and reaches the final "Yes" screen:
 
@@ -87,30 +86,11 @@ When your partner completes the questionnaire and reaches the final "Yes" screen
 Since responses are stored in `localStorage`, you can also view the conversation log on their device if they haven't sent it yet:
 
 1.  Ask them to visit the **Decode** link on the **same device/browser** they used to answer.
-    -   URL: `http://localhost:5173/?q=decode`
+    -   URL: `https://valentine-fpd3.vercel.app/?q=decode`
 2.  The app will display a modal with the conversation log (e.g., "Mi Amore: Yes, my love...").
 3.  **Ask them to take a screenshot** of this modal and send it to you! 📸
 
 ---
-
-## 📂 Project Structure
-
-A quick look at the codebase structure:
-
-```
-valentine/
-├── public/              # Static assets (images, audio files)
-├── src/
-│   ├── lib/
-│   │   ├── components/  # Svelte components (e.g., QuestionaireCard.svelte)
-│   │   └── utils/       # Utility functions (e.g., base64Parser.ts)
-│   ├── App.svelte       # Main application component & routing logic
-│   ├── main.ts          # Entry point
-│   └── types.ts         # TypeScript type definitions
-├── index.html           # HTML entry point
-├── package.json         # Project dependencies and scripts
-└── vite.config.ts       # Vite configuration
-```
 
 ## 🛠️ Built With
 
@@ -126,7 +106,7 @@ Feel free to fork this project and customize the questions, images, or music to 
 2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
+5.  Open a Pull Request to the dev branch
 
 ---
 
