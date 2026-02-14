@@ -1,5 +1,5 @@
 <script lang="ts">
-    interface Props {
+    type Props = {
         isOpen: boolean;
         conversationLog: string;
         onClose: () => void;
@@ -19,8 +19,10 @@
         <div
             class="modal-content"
             onclick={(e) => e.stopPropagation()}
-            role="document"
-            tabindex="0"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="Our love story"
+            tabindex="-1"
             onkeydown={(e) => e.key === "Escape" && onClose()}
         >
             <h2 class="courgette-regular">Our Love Story</h2>
