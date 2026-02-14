@@ -75,13 +75,21 @@ You need to generate a link that includes your partner's name.
 Share the copied link with your special someone. When they open it, they will see a greeting with their name and can proceed through the questionnaire.
 
 ### 3. View Their Response
-Because this app uses `localStorage` for privacy, **you cannot see their responses remotely**.
+### 3. View Their Response
+When your partner completes the questionnaire and reaches the final "Yes" screen:
 
-To see what they said:
+1.  A **"Send My Reply 💌"** button will appear.
+2.  Clicking this button will open **WhatsApp** with a pre-filled message containing their responses.
+3.  They just need to hit send to share their answers with you! 
+    - *Note*: This works best on mobile devices with WhatsApp installed. On desktop, it may open WhatsApp Web.
+
+*Alternative*: Reviewing answers locally
+Since responses are stored in `localStorage`, you can also view the conversation log on their device if they haven't sent it yet:
+
 1.  Ask them to visit the **Decode** link on the **same device/browser** they used to answer.
     -   URL: `http://localhost:5173/?q=decode`
-2.  The app will display an alert with the conversation log (e.g., "Mi Amore: Yes, my love...").
-3.  **Ask them to take a screenshot** of this alert and send it to you! 📸
+2.  The app will display a modal with the conversation log (e.g., "Mi Amore: Yes, my love...").
+3.  **Ask them to take a screenshot** of this modal and send it to you! 📸
 
 ---
 
