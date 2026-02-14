@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { base64Decode } from "../utils/base64Parser";
+    import {base64Decode} from "../utils/base64Parser";
 
     let currentStepId = $state("0");
     let loverResponseLog = $state(["0"]);
@@ -147,7 +147,7 @@
         if (currentStepId !== "final-yes" && currentStepId !== "final-no")
             return;
 
-        // Setup the audio source first
+        // Set up the audio source first
         setTimeout(() => {
             const trackNumber = Math.floor(Math.random() * 3);
             node.src = `/serenade-${trackNumber}.m4a`;
@@ -193,57 +193,58 @@
 </script>
 
 <div class="container">
-    <!-- Bind muted property to isMuted state -->
     <audio
-        {@attach playAudioOnAccept}
-        src="/i-love-you.mp3"
-        class="hidden"
-        bind:muted={isMuted}
+            {@attach playAudioOnAccept}
+            src="/i-love-you.mp3"
+            class="hidden"
+            bind:muted={isMuted}
     ></audio>
 
-    <button
-        class="audio-control"
-        onclick={() => (isMuted = !isMuted)}
-        aria-label={isMuted ? "Unmute" : "Mute"}
-    >
-        {#if isMuted}
-            🔇
-        {:else}
-            🔊
-        {/if}
-    </button>
+    {#if currentStepId === "final-yes" || currentStepId === "final-no"}
+        <button
+                class="audio-control"
+                onclick={() => (isMuted = !isMuted)}
+                aria-label={isMuted ? "Unmute" : "Mute"}
+        >
+            {#if isMuted}
+                🔇
+            {:else}
+                🔊
+            {/if}
+        </button>
+    {/if}
 
-    <img class="img" src="/calendar.png" alt="valentine calendar" />
+    <img class="img" src="/calendar.png" alt="valentine calendar"/>
     <div class="component-container">
         <p class="question-text courgette-regular">
             {currentStep.questionText}
         </p>
         <img
-            class="question-img"
-            src={currentStep.questionImage}
-            alt="it's about time"
+                class="question-img"
+                src={currentStep.questionImage}
+                alt="it's about time"
         />
     </div>
     {#if currentStep.showActionButtons}
         <div class="action-button-container">
             <button
-                onclick={() => gotoStep(currentStep.yesButtonGotoStep)}
-                class="btn yes-btn courgette-regular"
-                >{currentStep.yesButtonText}</button
+                    onclick={() => gotoStep(currentStep.yesButtonGotoStep)}
+                    class="btn yes-btn courgette-regular"
+            >{currentStep.yesButtonText}</button
             >
             <button
-                onclick={() => gotoStep(currentStep.noButtonGotoStep)}
-                class="btn no-btn courgette-regular"
-                >{currentStep.noButtonText}</button
+                    onclick={() => gotoStep(currentStep.noButtonGotoStep)}
+                    class="btn no-btn courgette-regular"
+            >{currentStep.noButtonText}</button
             >
         </div>
     {/if}
 
-    {#if currentStepId === "final-yes"}
+    {#if currentStepId === "final-yes" || currentStepId === "final-no"}
         <div class="action-button-container">
             <button
-                class="btn share-btn courgette-regular"
-                onclick={shareResponse}
+                    class="btn share-btn courgette-regular"
+                    onclick={shareResponse}
             >
                 Send My Reply 💌
             </button>
@@ -300,6 +301,7 @@
         font-size: 1.3rem;
         padding-block-end: 0.75rem;
     }
+
     .question-img {
         display: block;
         object-fit: contain;
